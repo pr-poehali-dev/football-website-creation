@@ -21,6 +21,7 @@ export default {
 			fontFamily: {
 				oswald: ['Oswald', 'sans-serif'],
 				roboto: ['Roboto', 'sans-serif'],
+				druk: ['Rubik', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
