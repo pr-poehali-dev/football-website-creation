@@ -81,38 +81,69 @@ const Index = () => {
           </p>
         </div>
 
-        <Card className="bg-gradient-to-r from-slate-800/80 to-slate-700/80 border-white/10 backdrop-blur mb-12">
-          <CardContent className="p-8">
-            <div className="grid grid-cols-3 items-center gap-8">
-              <div className="text-center">
+        <Card className="bg-gradient-to-r from-slate-800/80 to-slate-700/80 border-white/10 backdrop-blur mb-8">
+          <CardContent className="p-6">
+            <div className="flex items-start justify-between gap-6">
+              <div className="flex-1 text-center">
                 <img 
                   src={matchData.team1.logo} 
                   alt={matchData.team1.name}
-                  className="w-32 h-32 mx-auto mb-4 rounded-full object-cover border-4 border-white/20"
+                  className="w-20 h-20 mx-auto mb-3 rounded-full object-cover border-2 border-white/20"
                 />
-                <h2 className="text-4xl font-druk font-black tracking-wider text-white">
+                <h2 className="text-3xl font-druk font-black tracking-widest text-white uppercase">
                   {matchData.team1.name}
                 </h2>
               </div>
               
-              <div className="text-center">
-                <div className="text-7xl font-druk font-black tracking-tight mb-2">
+              <div className="text-center px-8">
+                <div className="text-6xl font-druk font-black tracking-tight mb-2">
                   <span className="text-white">{matchData.team1.score}</span>
-                  <span className="text-white/40 mx-4">:</span>
+                  <span className="text-white/40 mx-3">:</span>
                   <span className="text-white">{matchData.team2.score}</span>
                 </div>
-                <Badge variant="secondary" className="text-sm bg-green-600 text-white hover:bg-green-600">
+                <Badge variant="secondary" className="text-xs bg-green-600 text-white hover:bg-green-600 mb-6">
                   ФИНАЛ
                 </Badge>
+
+                <div className="grid grid-cols-2 gap-6 mt-6">
+                  <div>
+                    <h4 className="text-xs font-druk text-white/60 mb-3 tracking-wider">ГОЛЫ</h4>
+                    <div className="space-y-2">
+                      {matchData.team1.goals.map((goal, idx) => (
+                        <div key={idx} className="flex items-center gap-2 text-sm">
+                          <Icon name="CircleDot" size={14} className="text-green-400" />
+                          <span className="text-white font-medium">{goal.player} {goal.time}</span>
+                          {goal.type && <Badge variant="outline" className="text-xs py-0 px-1 border-green-500 text-green-400">{goal.type}</Badge>}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="text-xs font-druk text-white/60 mb-3 tracking-wider">ГОЛЫ</h4>
+                    <div className="space-y-2">
+                      {matchData.team2.goals.map((goal, idx) => (
+                        <div key={idx} className="flex items-center gap-2 text-sm">
+                          <Icon name="CircleDot" size={14} className="text-red-400" />
+                          <span className="text-white font-medium">{goal.player} {goal.time}</span>
+                        </div>
+                      ))}
+                      <div className="flex items-center gap-2 text-sm mt-3 pt-3 border-t border-white/10">
+                        <Icon name="Square" size={14} className="text-red-500 fill-current" />
+                        <span className="text-white font-medium">Шаров 65'</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div className="text-center">
+              <div className="flex-1 text-center">
                 <img 
                   src={matchData.team2.logo} 
                   alt={matchData.team2.name}
-                  className="w-32 h-32 mx-auto mb-4 rounded-full object-cover border-4 border-white/20"
+                  className="w-20 h-20 mx-auto mb-3 rounded-full object-cover border-2 border-white/20"
                 />
-                <h2 className="text-4xl font-druk font-black tracking-wider text-white">
+                <h2 className="text-3xl font-druk font-black tracking-widest text-white uppercase">
                   {matchData.team2.name}
                 </h2>
               </div>
@@ -195,66 +226,7 @@ const Index = () => {
           </Card>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
-          <Card className="bg-slate-800/50 border-white/10 backdrop-blur">
-            <CardContent className="p-6">
-              <h3 className="text-2xl font-druk font-black mb-6 text-white flex items-center gap-2">
-                <Icon name="Target" size={24} />
-                ГОЛЫ • ТИТАН
-              </h3>
-              <div className="space-y-3">
-                {matchData.team1.goals.map((goal, idx) => (
-                  <div key={idx} className="flex items-center justify-between p-4 rounded bg-green-600/20 border border-green-600/30">
-                    <div className="flex items-center gap-3">
-                      <Icon name="CircleDot" size={20} className="text-green-400" />
-                      <span className="font-bold text-white">{goal.player}</span>
-                    </div>
-                    <div className="text-right">
-                      <div className="font-bold text-white">{goal.time}</div>
-                      {goal.type && (
-                        <Badge variant="outline" className="text-xs mt-1 border-green-500 text-green-400">
-                          {goal.type}
-                        </Badge>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
 
-          <Card className="bg-slate-800/50 border-white/10 backdrop-blur">
-            <CardContent className="p-6">
-              <h3 className="text-2xl font-druk font-black mb-6 text-white flex items-center gap-2">
-                <Icon name="Target" size={24} />
-                ГОЛЫ • ЛЕГИОН
-              </h3>
-              <div className="space-y-3">
-                {matchData.team2.goals.map((goal, idx) => (
-                  <div key={idx} className="flex items-center justify-between p-4 rounded bg-red-600/20 border border-red-600/30">
-                    <div className="flex items-center gap-3">
-                      <Icon name="CircleDot" size={20} className="text-red-400" />
-                      <span className="font-bold text-white">{goal.player}</span>
-                    </div>
-                    <div className="text-right">
-                      <div className="font-bold text-white">{goal.time}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              
-              <div className="mt-6 p-4 rounded bg-red-600/20 border border-red-600/30">
-                <div className="flex items-center gap-3">
-                  <Icon name="Square" size={20} className="text-red-500 fill-current" />
-                  <div>
-                    <div className="font-bold text-white">Шаров</div>
-                    <div className="text-sm text-white/70">Красная карточка • 65'</div>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
 
         <Card className="bg-slate-800/50 border-white/10 backdrop-blur">
           <CardContent className="p-8">
